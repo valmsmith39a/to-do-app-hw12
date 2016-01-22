@@ -6,48 +6,22 @@ var newTaskObjectG;
 
 function init(){
 	$('#add-task-button').on('click', addTaskButton);
+	$('#date-input').val(moment().format('M-D-YYYY'));
 	$('.tasks-list').on('click', '.delete-button', deleteTaskButton);
 	$('.tasks-list').on('click', '.completed-checkbox', completedCheckboxButton);
-	//$('.tasks-list').on('click', '.edit-button', saveEditsButton);
-
-	//$('.tasks-titles').on('click', '.date-output', sortFields);
-	//$('.tasks-titles').on('click', '.number-output', sortFields);
-	//$('.tasks-titles').on('click', '.email-output', sortFields);
-
-  
+	
 	$.get('/tasks', function(data) {
-		  debugger;
-			console.log('data is', data);
 			arrayOfTasksObjectsG = data;
 			updateArrayOfRowContainers();
 			displayTasksList();
    });
-	
-	
-	/*
-	var newTask = "buy shoes";
-	var statusOfTask = true;
-
-	$.post('/tasks', {task:newTask, status:statusOfTask})
-	.success(function(data) {
-		//debugger;
-  	console.log('posting task', data);
-    
-    var $li = $('<li>').text(newName);
-    $('#output').append($li);
-    
-  }).fail(function(err) {
-    alert('something went wrong :(')
-  });
-  */
 }
 
 function addTaskButton(){
-	console.log('add task button');
 	var date = $('#date-input').val();
 	var task = $('#task-input').val();
 	var status = false;
-  var index = arrayOfTasksObjectsG.length + 1;
+  var index = arrayOfTasksObjectsG.length;
 
 	var taskObject={
 				date:date,
@@ -60,27 +34,12 @@ function addTaskButton(){
 
   $.post('/tasks/add', taskObject)
 	.success(function(data) {
-		debugger;
-  	console.log('posting task', data);
-
   	// update array of containers 
   	updateArrayOfRowContainers();
   	displayTasksList();
-    /*
-    var $li = $('<li>').text(newName);
-    $('#output').append($li);
-    */
   }).fail(function(err) {
     alert('something went wrong :(')
   });
-
-  /*
-	$.get('/tasks', function(data) {
-		//debugger;
-		console.log('data is', data);
-	  
-   }); // $.get
-  */
 }
 
 function deleteTaskButton(){
@@ -89,25 +48,13 @@ function deleteTaskButton(){
 
 	$.post('/tasks/delete', {indexToRemove:indexOfElementToRemove})
 	.success(function(data) {
-		debugger;
-  	console.log('resulting array', data);
-
-
 
   arrayOfRowContainersObjectsG.splice(indexOfElementToRemove,1);
-	//saveToLocalStorage(arrayOfContactsObjectsG);
 	updateArrayOfRowContainers();
 	displayTasksList();
-
-  	// update array of containers 
-    /*
-    var $li = $('<li>').text(newName);
-    $('#output').append($li);
-    */
   }).fail(function(err) {
     alert('something went wrong :(')
   });
-	
 }
 
 function completedCheckboxButton(){
@@ -123,39 +70,12 @@ function completedCheckboxButton(){
 
 	$.post('/tasks/checkbox', {indexChecked: indexChecked, status:completedValue})
 	.success(function(data) {
-		debugger;
-  	console.log('checkbox, returned arry; ', data);
-
   	arrayOfTasksObjectsG = data;
-
-  	// update array of containers 
   	updateArrayOfRowContainers();
   	displayTasksList();
-    /*
-    var $li = $('<li>').text(newName);
-    $('#output').append($li);
-    */
   }).fail(function(err) {
-    alert('something went wrong :(')
+    alert('something went wrong :(');
   });
-
-
-
-
-
-}
-
-function saveToServer(arrayOfTasksObjects){
-	// GET array of Task objects from server 
-
-	// Parse the JSON String to get the object
-
-	// Modify the object
-
-	// Stringify the object
-
-	// Post back to server 
-
 }
 
 function updateArrayOfRowContainers(){
@@ -164,33 +84,24 @@ function updateArrayOfRowContainers(){
 
 	arrayOfTasksObjectsG.map(function(task){
 		var $rowContainer = $('<div>').addClass('row row-container');
-		var $dateColumn = $('<div>').addClass('date-col col-md-2 col-sm-4 col-xs-6').text(task.date); //.attr('contenteditable', true);
+		var $dateColumn = $('<div>').addClass('date-col col-md-1 col-xs-3').text(task.date); 
     $rowContainer.append($dateColumn); 
-    var $taskColumn = $('<div>').addClass('task-col col-md-2 col-sm-4 col-xs-6').text(task.task);//.attr('contenteditable', true);
+    var $taskColumn = $('<div>').addClass('task-col col-md-7 col-xs-3').text(task.task);
 		$rowContainer.append($taskColumn);
-		//var $emailColumn = $('<div>').addClass('email-col col-md-2 col-sm-4 col-xs-6').text(contact.email).attr('contenteditable', true);
-		//$rowContainer.append($emailColumn);
-    
-    //var $completedButton = $('<div>').addClass('completed-button col-md-2 col-sm-4 col-xs-6');
-    debugger;
+
     var completedFlag = JSON.parse(task.status); 
-    debugger;
-    console.log('completed Flag', completedFlag);
-    var $completedCheckbox = $('<input>').addClass('completed-checkbox col-md-2 col-sm-4 col-xs-6').attr('type', 'checkbox').attr('value', JSON.parse(completedFlag));
-   
+    var $completedCheckbox = $('<input>').addClass('completed-checkbox col-md-2 col-xs-3').attr('type', 'checkbox').attr('value', JSON.parse(completedFlag)).attr('id', 'complete-checkbox');
+
     if(completedFlag == true) {
-    	debugger;
     	$completedCheckbox.prop('checked', true); 
     }
     else {
     	$completedCheckbox.prop('checked', false); 
     }
     
-    //var $completedIcon = $('<i>').addClass('fa fa-floppy-o');
-    //$completedCheckbox.append($completedIcon);
     $rowContainer.append($completedCheckbox);
 
-    var $deleteButton = $('<div>').addClass('delete-button col-md-2 col-sm-4 col-xs-6');
+    var $deleteButton = $('<div>').addClass('delete-button col-md-2 col-xs-3');
     var $deleteIcon = $('<i>').addClass('fa fa-trash');
     $deleteButton.append($deleteIcon);
     $rowContainer.append($deleteButton);
@@ -201,7 +112,7 @@ function updateArrayOfRowContainers(){
 
 function displayTasksList(){
 	$('.tasks-list').append(arrayOfRowContainersObjectsG);
-	$('.input-field').val('');  // Clears all the input fields
+	$('#task-input').val('');
 }
 
 

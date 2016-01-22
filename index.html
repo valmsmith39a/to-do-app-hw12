@@ -15,7 +15,7 @@
 			<h2>Task List</h2>
 		    <h5>New Task</h5> 
 			<div class='input date-input-container col-md-3 col-sm-4 col-xs-4'>Date
-				<br><input class = 'input-field' id='date-input' type="text" placeholder="Date"></input>
+				<br><input class = 'input-field' id='date-input' type="text" value=""></input>
 			</div>
 			<div class='input task-input-container col-md-3 col-sm-4 col-xs-4'>Task
 			    <br><input class = 'input-field' id='task-input' type="text" placeholder=""></input>
@@ -29,16 +29,16 @@
 		</div>
 		<div class='row tasks-titles'> 
 		    <h5>Tasks</h5>
-			<div class='output date-output col-md-2 col-sm-4 col-xs-6'>Date</div>
-			<div class='output task-output col-md-2 col-sm-4 col-xs-6'>Task</div>
-			<div class='output completion-output col-md-2 col-sm-4 col-xs-6'>Completed</div>
-			<div class='output delete col-md-2 col-sm-4 col-xs-6'>Delete</div>
-			<!-- <div class='output edit col-md-2 col-sm-4 col-xs-6'>Save Edits</div> -->
+			<div class='output date-output col-md-1 col-xs-3'>Date</div>
+			<div class='output task-output col-md-7 col-xs-3'>Task</div>
+			<div class='output completion-output col-md-2 col-xs-3'>Completed</div>
+			<div class='output delete col-md-2 col-xs-3'>Delete</div>
 		</div>
 		<div class='row tasks-list'>
 		</div>
 	</div>
 	<script src='https://code.jquery.com/jquery-2.2.0.min.js'></script>
+	<script src="http://momentjs.com/downloads/moment.min.js"></script>
 	<script src='js/main.js'></script>
 </body>
 </html>

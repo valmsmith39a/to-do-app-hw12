@@ -93,8 +93,6 @@ app.post('/tasks/checkbox', function(req, res) {
     var status = req.body.status;
     arr[index].status = status;
 
-    console.log(arr);
-
     fs.writeFile('./tasks.json', JSON.stringify(arr), function(err) {
       if(err) return res.status(400).send(err);
       res.send(arr);

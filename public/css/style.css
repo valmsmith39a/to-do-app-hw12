@@ -1,28 +1,44 @@
 body {
-	background-color: #FAEBD7; 
+	background-color: #FAEBD7;
 }
 
 #add-task-button {
 	position:relative;
 	margin-top:10%;
 	background-color:red;
+	color:yellow;
 	height:40px;
 	width:100px;
 }
 
 .output {
 	position:relative;
-	text-align: left;
-	margin-left: 3px;
+	text-align: center;
+	margin:0px;
 	background-color: #cce5ff;
 }
 
 .task-output {
 	position:relative;
-	left:-1.8%;
 }
 
-.task-output, .completion-output {
+.completion-output {
 	position:relative;
-	left:-1%;
+	text-align:center;
+}
+
+.completed-checkbox {
+	position:relative;
+	left:6%;
+}
+
+.delete-button {
+	position:relative;
+	text-align:center;
+}
+
+#complete-checkbox{
+	position:relative;
+	text-align: center;
+	background-color: yellow;
 }
