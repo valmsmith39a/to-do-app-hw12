@@ -6,7 +6,7 @@ var newTaskObjectG;
 
 function init(){
 	$('#add-task-button').on('click', addTaskButton);
-	$('#date-input').val(moment().format('M-D-YYYY'));
+	//$('#date-input').val(moment().format('M-D-YYYY'));
 	$('.tasks-list').on('click', '.delete-button', deleteTaskButton);
 	$('.tasks-list').on('click', '.completed-checkbox', completedCheckboxButton);
 	

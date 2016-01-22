@@ -16,6 +16,7 @@ body {
 	text-align: center;
 	margin:0px;
 	background-color: #cce5ff;
+	font-size:13px;
 }
 
 .task-output {
@@ -37,6 +38,10 @@ body {
 	text-align:center;
 }
 
+.date-col {
+	position:relative;
+  font-size: 13px;
+}
 #complete-checkbox{
 	position:relative;
 	text-align: center;
