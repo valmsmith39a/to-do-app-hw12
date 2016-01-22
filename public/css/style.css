@@ -1,0 +1,28 @@
+body {
+	background-color: #FAEBD7; 
+}
+
+#add-task-button {
+	position:relative;
+	margin-top:10%;
+	background-color:red;
+	height:40px;
+	width:100px;
+}
+
+.output {
+	position:relative;
+	text-align: left;
+	margin-left: 3px;
+	background-color: #cce5ff;
+}
+
+.task-output {
+	position:relative;
+	left:-1.8%;
+}
+
+.task-output, .completion-output {
+	position:relative;
+	left:-1%;
+}
